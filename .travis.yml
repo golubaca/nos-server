@@ -10,6 +10,9 @@ go_import_path: github.com/golubaca/nos-server
 
 addons:
   apt:
+    sources:
+      - sourceline: 'deb http://security.ubuntu.com/ubuntu xenial-security main'
+      
     packages:
       - build-essential
       - cmake
