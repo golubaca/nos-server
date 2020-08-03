@@ -1,6 +1,6 @@
 # Use new container infrastructure to enable caching
 sudo: required
-dist: trusty
+dist: bionic
 
 # language is go
 language: go
