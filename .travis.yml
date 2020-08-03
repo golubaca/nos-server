@@ -10,6 +10,9 @@ go_import_path: github.com/golubaca/nos-server
 
 addons:
   apt:
+    sources:
+      - sourceline: 'deb http://security.ubuntu.com/ubuntu xenial-security main'
+
     packages:
       - build-essential
       - cmake
@@ -30,7 +33,6 @@ addons:
       - gfortran
 
 before_install:
-  - sudo add-apt-repository "deb http://security.ubuntu.com/ubuntu xenial-security main"
   - ./travis_build_opencv.sh
   - export PKG_CONFIG_PATH=$(pkg-config --variable pc_path pkg-config):$HOME/usr/lib/pkgconfig
   - export INCLUDE_PATH=$HOME/usr/include:${INCLUDE_PATH}
