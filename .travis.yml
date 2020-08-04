@@ -1,6 +1,6 @@
 # Use new container infrastructure to enable caching
 sudo: required
-dist: trusty
+dist: bionic
 
 # language is go
 language: go
@@ -8,26 +8,31 @@ go:
   - "1.14"
 go_import_path: github.com/golubaca/nos-server
 
+services:
+  - xvfb
 addons:
   apt:
+    sources:
+      - sourceline: 'deb http://security.ubuntu.com/ubuntu xenial-security main'
+      
     packages:
-    - libgmp-dev
-    - build-essential
-    - cmake
-    - git
-    - libgtk2.0-dev
-    - pkg-config
-    - libavcodec-dev
-    - libavformat-dev
-    - libswscale-dev
-    - libtbb2
-    - libtbb-dev
-    - libjpeg-dev
-    - libpng-dev
-    - libtiff-dev
-    - libjasper-dev
-    - libdc1394-22-dev
-    - xvfb
+      - build-essential
+      - cmake
+      - unzip
+      - pkg-config
+      - libjpeg-dev
+      - libpng-dev
+      - libtiff-dev
+      - libjasper-dev
+      - libavcodec-dev
+      - libavformat-dev
+      - libswscale-dev
+      - libv4l-dev
+      - libxvidcore-dev
+      - libx264-dev
+      - libgtk-3-dev
+      - libatlas-base-dev
+      - gfortran
 
 before_install:
   - ./travis_build_opencv.sh
@@ -36,7 +41,6 @@ before_install:
   - export LD_LIBRARY_PATH=$HOME/usr/lib:${LD_LIBRARY_PATH}
   - sudo ln /dev/null /dev/raw1394
   - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
 
 before_cache:
   - rm -f $HOME/fresh-cache
